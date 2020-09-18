@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPainter>
+#include <QPaintEvent>
 
 class Task1 : public QWidget
 {
