@@ -14,12 +14,15 @@ QTextEditor::QTextEditor(QWidget *parent, const QString &fileName)
     ui->actionRedo->setEnabled(false);
     ui->actionUndo->setEnabled(false);
 
+    //connect(ui->actionClose, SIGNAL(triggered()), this, SLOT(close()));
+    //connect(ui->actionExit, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+
     connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(onDocumentModified()));
 
     connect(ui->textEdit, SIGNAL(copyAvailable(bool)), ui->actionCopy, SLOT(setEnabled(bool)));
     connect(ui->textEdit, SIGNAL(copyAvailable(bool)), ui->actionCut, SLOT(setEnabled(bool)));
     connect(ui->textEdit, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
-    connect(ui->textEdit, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
+    connect(ui->textEdit, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));    
 
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveFile()));
     connect(ui->actionSave_As, SIGNAL(triggered()), this, SLOT(saveFileAs()));
