@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QTime>
 #include <QLabel>
+#include <QShortcut>
 #include "sorts.h"
 
 QT_BEGIN_NAMESPACE
@@ -25,15 +26,20 @@ public:
 
 private slots:
     void on_generateTable_clicked();
-
     void on_selectSort_currentIndexChanged(const QString &arg1);
-
     void on_tableWidget_cellClicked(int row, int column);
+    void setBubbleSort();
+    void setInsertionSort();
 
 private:
     void fillWithRandomNums(int** arr, int rows, int cols);
     void fillTable(QTableWidget *table, int** arr, bool transposeArr = true);
     void initUi();
+
+
+    QShortcut *keyCtrlG;
+    QShortcut *keyCtrlB;
+    QShortcut *keyCtrlI;
 
     sortPtr currentSort;
     QLabel** labels;

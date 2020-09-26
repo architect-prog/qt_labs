@@ -13,11 +13,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     initUi();
 
+    keyCtrlG = new QShortcut(this);
+    keyCtrlG->setKey(Qt::CTRL + Qt::Key_G);
+    connect(keyCtrlG, SIGNAL(activated()), this, SLOT(on_generateTable_clicked()));
+
+    keyCtrlB = new QShortcut(this);
+    keyCtrlB->setKey(Qt::CTRL + Qt::Key_B);
+    connect(keyCtrlB, SIGNAL(activated()), this, SLOT(setBubbleSort()));
+
+    keyCtrlI = new QShortcut(this);
+    keyCtrlI->setKey(Qt::CTRL + Qt::Key_I);
+    connect(keyCtrlI, SIGNAL(activated()), this, SLOT(setInsertionSort()));
+
     array = new int*[NUM_OF_ROWS];
     for (int i = 0; i < NUM_OF_ROWS; i++)
     {
         array[i] = new int[NUM_OF_COLS]{0};
     }
+
 }
 
 MainWindow::~MainWindow()
@@ -31,10 +44,18 @@ void MainWindow::fillTable(QTableWidget *table, int** arr, bool transposeArr)
     {
         for (int j = 0; j < table->columnCount(); j++)
         {
+            QTableWidgetItem *item = nullptr;
             if(transposeArr)
-                table->setItem(i, j, new QTableWidgetItem(QString::number(arr[j][i])));
+            {
+                item = new QTableWidgetItem(QString::number(arr[j][i]));
+                item->setToolTip(QString::number(arr[j][i]));
+            }
             else
-                table->setItem(i, j, new QTableWidgetItem(QString::number(arr[i][j])));
+            {
+                item = new QTableWidgetItem(QString::number(arr[i][j]));
+                item->setToolTip(QString::number(arr[i][j]));
+            }
+            table->setItem(i, j, item);
         }
     }
 }
@@ -48,6 +69,15 @@ void MainWindow::fillWithRandomNums(int** arr, int rows, int cols)
             arr[i][j] = qrand() % 100;
         }
     }
+}
+
+void MainWindow::setBubbleSort()
+{
+    ui->selectSort->setCurrentIndex(1);
+}
+void MainWindow::setInsertionSort()
+{
+    ui->selectSort->setCurrentIndex(0);
 }
 
 void MainWindow::initUi()
@@ -67,6 +97,7 @@ void MainWindow::initUi()
     labels[0] = ui->numOfComparisons1;
     labels[1] = ui->numOfComparisons2;
     labels[2] = ui->numOfComparisons3;
+
 }
 
 void MainWindow::on_generateTable_clicked()
