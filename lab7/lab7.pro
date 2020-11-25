@@ -23,7 +23,10 @@ HEADERS += \
     abstractfactory.h \
     abstractlist.h \
     abstractuielements.h \
+    builder.h \
+    builderfactory.h \
     mainwindow.h \
+    robot.h \
     uielements.h \
     uielementsfactory.h
 

@@ -10,14 +10,12 @@
 
 class UiElementsFactory : public AbstractFactory
 {
-    static UiElementsFactory* instance;
     UiElementsFactory() { }
 public:
 
-    static UiElementsFactory * GetInstance()
+    static UiElementsFactory* GetInstance()
     {
-       if(instance == nullptr)
-           instance = new UiElementsFactory();
+       static UiElementsFactory* instance = new UiElementsFactory();
        return instance;
     }
 
@@ -41,6 +39,5 @@ public:
         return  new UiPushButton();
     }
 };
-UiElementsFactory* UiElementsFactory::instance = nullptr;
 
 #endif // UIELEMENTSFACTORY_H

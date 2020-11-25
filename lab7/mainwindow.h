@@ -3,6 +3,16 @@
 
 #include <QMainWindow>
 
+#include "ui_mainwindow.h"
+#include "abstractfactory.h"
+#include "uielementsfactory.h"
+#include "uielements.h"
+#include "abstractuielements.h"
+
+#include "builder.h"
+#include "robot.h"
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,5 +27,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Robot* robot;
 };
 #endif // MAINWINDOW_H
